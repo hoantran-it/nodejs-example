@@ -7,14 +7,6 @@ var userFile = __dirname + "/" + "users.json";
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-var user = {
-  "user4" : {
-    "name" : "tina",
-    "profession" : "architect",
-    "id": 4
-  }
-}
-
 function readDataFromFile(file){
   try {
     var data = fs.readFileSync(file, 'utf8');
@@ -56,15 +48,17 @@ function modifyUser(id, newInfo){
   data = JSON.parse( data );
   // Get user info by id
   var userInfo = data["user" + id];
-  // Check and update data
-  if(typeof newInfo.id != "undefined"){
-    userInfo.id = newInfo.id;
-  }
-  if(typeof newInfo.name != "undefined"){
-    userInfo.name = newInfo.name;
-  }
-  if(typeof newInfo.profession != "undefined"){
-    userInfo.profession = newInfo.profession;
+  if(typeof userInfo != "undefined"){
+    // Check and update data
+    if(typeof newInfo.id != "undefined"){
+      userInfo.id = newInfo.id;
+    }
+    if(typeof newInfo.name != "undefined"){
+      userInfo.name = newInfo.name;
+    }
+    if(typeof newInfo.profession != "undefined"){
+      userInfo.profession = newInfo.profession;
+    }
   }
   // Set back to data json
   data["user" + id] = userInfo;
@@ -90,16 +84,22 @@ app.get('/getAllUser', function (req, res) {
   res.end();
 })
 
+// Json for testing request:
+// {"userInfo":{"name":"tina","profession":"architect","id":4}}
 app.post('/addUser', function (req, res) {
   res.write(addUser(req.body.userInfo));
   res.end();
 })
 
+// Json for testing request:
+// {"userInfo":{"profession":"doctor"},"id":4}
 app.put('/modifyUser', function (req, res) {
   res.write(modifyUser(req.body.id, req.body.userInfo));
   res.end();
 })
 
+// Json for testing request:
+// {"id":4}
 app.delete('/deleteUser', function (req, res) {
   res.write(deleteUser(req.body.id));
   res.end();

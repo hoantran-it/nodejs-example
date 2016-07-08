@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-example",
+  "version": "1.0.0",
+  "description": "node js example",
+  "main": "start.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "start",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoantran-it/nodejs-example.git"
+  },
+  "author": "hoantran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoantran-it/nodejs-example/issues"
+  },
+  "homepage": "https://github.com/hoantran-it/nodejs-example#readme"
+}
